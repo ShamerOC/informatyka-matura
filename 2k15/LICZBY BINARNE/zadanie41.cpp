@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -9,24 +9,26 @@ int main() {
 	ifstream plik("liczby.txt");
 	
 	if(!plik) {
-		cout<<"Blad!";
+		cout << "blad wczytywania pliku";
 		return 0;
 	}
 	
 	string a;
-	int z, j, wynik = 0;
+	int zero, jeden, ilosc = 0;
 	
 	while(!plik.eof()) {
-		z = 0;
-		j = 0;
 		plik >> a;
-		for(int i = 0; i < a.length(); i++) {
-			if(a[i] == '0') z++;
-			else if(a[i] == '1') j++;
-		}
-		if(z > j) wynik++;
-	}
-	cout<<wynik;
+		zero = 0;
+		jeden = 0;
 		
+		for(int i = 0; i < a.length(); i++) {
+			if (a[i] == '0') zero++;
+			else if (a[i] == '1') jeden++;
+		}
+		
+		if(zero > jeden) ilosc++;
+	}
+	
+	cout<<ilosc;
 	return 0;
 }

@@ -1,47 +1,47 @@
-#include <iostream>
-#include <fstream>
-#include <string>
+ #include <iostream>
+ #include <fstream>
+ 
+ using namespace std;
+ 
+ int main() {
+ 	ifstream plik("liczby.txt");
+ 	
+ 	if(!plik) {
+ 		cout << "Blad wczytywania pliku!";
+ 		return 0;
+	 }
+	 
+	 string a, liczbaMax = "01", liczbaMin = "1111111111";
+	 int max = 0, wierszMax, min = 10, wierszMin;
+	 int wiersz = 1;
+	 while (!plik.eof()) {
+	 	plik >> a;
+	 	if(a.length() >= max) {
+	 		for(int i = 0; i <= a.length() - 1; i++) {
+	 			if(a[i] == '1' && liczbaMax[i] == '0') {
+	 				max = a.length();
+	 				wierszMax = wiersz;
+			 		liczbaMax = a;
+			 		break;
+				 } 
+			 }
 
-using namespace std;
-
-int main() {
-	
-	ifstream plik("liczby.txt");
-	
-	if(!plik) {
-		cout<<"Blad!";
-		return 0;
-	}
-	
-	string a;
-	int z, j, dwa = 0, osiem = 0, cdf = 0, mina, maxa;
-	long int wynik = 0, m = 1, max = 0, min = 1000;
-	
-	while(!plik.eof()) {
-		wynik = 0;
-		m = 1;
-		cdf++;
-		plik >> a;
-		for(int i = a.length(); i > 0; i--) {
-			if(a[i] == '0') {
-				m *= 2;
-			}
-			else if(a[i] == '1') {
-				wynik += m;
-				m *= 2;
-			}
+		 }
+		 if(a.length() <= min) {
+			 for(int i = 0; i <= a.length() - 1; i++) {
+			 	if(a[i] == '0' && liczbaMin[i] == '1') {
+			 		min = a.length();
+		 			wierszMin = wiersz;
+		 			liczbaMin = a;
+		 			break;
+				 }
+			 }
 		}
-		
-		if(wynik > max) {
-			max = wynik;
-			maxa = cdf;
-		} 
-		if(wynik < min) {
-			min = wynik;
-			mina = cdf;
-		}
-	}
-	cout<<"max: "<<max<<" min: "<<min;
-		
-	return 0;
-}
+	 	wiersz++;
+	 }
+	 
+	 cout << "najmniejsza liczba to: " << liczbaMin << " wiersz: " << wierszMin << endl << "Najwieksza liczba to: " << liczbaMax << " wiersz: " << wierszMax;
+	 
+ 	
+ 	return 0;
+ }
